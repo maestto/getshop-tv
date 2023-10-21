@@ -1,15 +1,38 @@
-import React, {RefObject, useEffect, useRef} from 'react';
+import React, {RefObject, useEffect, useRef, useState} from 'react';
+import { motion } from 'framer-motion';
 
 import './MainBanner.scss';
 import QRCode from "../media/qr-code.png"
 import video from "../media/video.mp4"
 
-function MainBanner() {
+type ComponentProps = { toggleComponent: () => void };
+
+const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
     const videoRef: RefObject<HTMLVideoElement> = useRef(null);
+
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setIsVisible(true);
+        }, 5000);
+
+        return () => clearTimeout(timeout);
+    }, []);
+
+    const toggleVideo = () => {
+        const video = videoRef.current;
+        if (video) {
+            if (video.paused) video.play();
+            else video.pause();
+        }
+    };
 
     useEffect(() => {
         const onKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Enter') console.log('Go to PhoneBanner')
+            if (e.key === 'Enter') {
+                if(isVisible) toggleComponent();
+            }
         };
 
         document.addEventListener('keydown', onKeyDown);
@@ -17,7 +40,7 @@ function MainBanner() {
         return () => {
             document.removeEventListener('keydown', onKeyDown);
         };
-    }, []);
+    }, [isVisible]);
 
     return (
         <div className="mainBanner">
@@ -26,12 +49,21 @@ function MainBanner() {
                     <source src={video} type="video/mp4" />
                 </video>
             </div>
-            <div className="mainBanner__banner">
-                <h1 className="mainBanner__banner__header">ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША!<br/>ПОДАРИТЕ ЕМУ СОБАКУ!</h1>
-                <img className="mainBanner__banner__img" src={QRCode} alt="QR code"/>
-                <h2 className="mainBanner__banner__subheader">Сканируйте QR-код или нажмите ОК</h2>
-                <button className="mainBanner__banner__button" onClick={() => console.log('Go to PhoneBanner')}>ОК</button>
-            </div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isVisible ? 1 : 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                {isVisible && (
+                    <div className="mainBanner__banner">
+                        <h1 className="mainBanner__banner__header">ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША!<br/>ПОДАРИТЕ ЕМУ СОБАКУ!</h1>
+                        <img className="mainBanner__banner__img" src={QRCode} alt="QR code"/>
+                        <h2 className="mainBanner__banner__subheader">Сканируйте QR-код или нажмите ОК</h2>
+                        <button className="mainBanner__banner__button" onClick={() => toggleComponent()}>ОК</button>
+                    </div>
+                )}
+            </motion.div>
+            );
         </div>
     );
 }

@@ -1,0 +1,139 @@
+@import "../mixin";
+
+.phoneBanner {
+  background: url("../media/background.png");
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__main {
+    background: #86D3F4;
+    max-width: 380px;
+    height: 721px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__header {
+      @include text(26px, 400);
+      padding-top: 72px
+    }
+
+    &__phone {
+      @include text(32px, 700);
+      margin-top: 13px;
+      margin-bottom: 13px;
+    }
+
+    &__subheader {
+      @include text(14px, 400);
+      margin-bottom: 13px;
+    }
+
+    &__container {
+      &__keyboard {
+        max-width: 284px;
+        max-height: 238px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 10px;
+        width: 300px;
+
+        .key {
+          @include text(20px, 500);
+          background: #86D3F4;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 2px solid #000;
+          padding: 12px 30px;
+        }
+
+        .clear {
+          grid-column: span 2;
+        }
+
+        .point {
+          color: #FFFFFF;
+          background: #000000;
+        }
+      }
+
+      &__checkboxLabel {
+        @include text(14px, 400);
+        text-align: left;
+        color: #565656;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        &__img__point {
+          box-shadow: 0px 0px 5px #000;
+        }
+      }
+
+      &__checkboxLabel > div {
+        margin-right: 10px;
+      }
+
+      &__submitButton {
+        @include text(14px, 400);
+        width: 100%;
+        margin-top: 13px;
+        background: #86D3F4;
+        color: #4E4E4E;
+        padding: 16px 19px;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+        border: 1px solid #4E4E4E;
+        margin-bottom: 72px;
+
+        .point {
+          color: #FFFFFF;
+          background: #000000;
+        }
+      }
+    }
+  }
+
+  &__leftSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+
+    &__closeButton {
+      display: flex;
+      justify-content: flex-end;
+      width: 88px;
+      height: 52px;
+    }
+
+    &__QR-Code {
+      width: 314px;
+      display: flex;
+      justify-content: flex-end;
+      margin-left: 20px;
+      align-items: center;
+
+      &__text {
+        @include text(16px, 500);
+        color: #FFFFFF;
+        text-align: right;
+        text-transform: uppercase;
+      }
+
+      &__img {
+        height: 110px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
