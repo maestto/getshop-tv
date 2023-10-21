@@ -10,7 +10,7 @@ type ComponentProps = { toggleComponent: () => void };
 const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
     const videoRef: RefObject<HTMLVideoElement> = useRef(null);
 
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState<boolean>(false);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -20,17 +20,17 @@ const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
         return () => clearTimeout(timeout);
     }, []);
 
-    const toggleVideo = () => {
-        const video = videoRef.current;
-        if (video) {
-            if (video.paused) video.play();
-            else video.pause();
-        }
-    };
+    // const toggleVideo = (): void => {
+    //     const video = videoRef.current;
+    //     if (video) {
+    //         if (video.paused) video.play();
+    //         else video.pause();
+    //     }
+    // };
 
     useEffect(() => {
-        const onKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Enter') {
+        const onKeyDown = (event: KeyboardEvent): void => {
+            if (event.key === 'Enter') {
                 if(isVisible) toggleComponent();
             }
         };
