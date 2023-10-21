@@ -13,9 +13,10 @@ import closeButtonPoint from "../media/btn/close/close_btn_point.svg";
 type ComponentProps = { toggleComponent: () => void };
 
 const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
-    const [currentPosition, setCurrentPosition] = useState<number>(1);
+    const [currentPosition, setCurrentPosition] = useState<number>(4);
     const [isCheckboxChecked, setIsCheckboxChecked] = useState<boolean>(false);
     const [phoneNumber, setPhoneNumber] = useState<string>("+7(___)___-__-__");
+    const [isSubmitButtonAvailable, setIsSubmitButtonAvailable] = useState<boolean>(false);
 
     enum NAVIGATION_POINT {
         ONE = 0,
@@ -86,6 +87,8 @@ const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent): void => {
+            if(isSubmitButtonAvailable) setIsSubmitButtonAvailable(false);
+            if(phoneNumber.indexOf("_") === -1 && isCheckboxChecked) setIsSubmitButtonAvailable(true);
             if (KEY_PRESS.DIGIT.test(event.key)) addNumberToPhoneNumber(event.key);
             else if (event.key === KEY_PRESS.ENTER) {
                 switch(currentPosition) {
@@ -96,6 +99,7 @@ const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
                         return setIsCheckboxChecked(!isCheckboxChecked);
                     }
                     case NAVIGATION_POINT.SUBMIT: {
+                        if(isSubmitButtonAvailable) console.log('transition to info')
                         return;
                     }
                     case NAVIGATION_POINT.CLOSE: {
@@ -160,17 +164,31 @@ const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
                                 </button>
                             ))}
                     </div>
-                    <label className={'phoneBanner__main__container__checkboxLabel'}>
+                    <label className="phoneBanner__main__container__checkboxLabel" onClick={() => setIsCheckboxChecked(!isCheckboxChecked)}>
                         <div className={`phoneBanner__main__container__checkboxLabel__checkbox ${isCheckboxChecked ? 'checked' : ''}`}>
-                            <img className={`checkbox-label__img__${currentPosition === NAVIGATION_POINT.CHECKBOX ? "point" : ""}`} src={isCheckboxChecked ? checkboxChecked : checkbox} alt="Checkbox" />
+                            <img
+                                className = {`phoneBanner__main__container__checkboxLabel__img__${currentPosition === NAVIGATION_POINT.CHECKBOX ? "point" : ""}`}
+                                src = {isCheckboxChecked ? checkboxChecked : checkbox}
+                                alt = "Checkbox"
+                            />
                         </div>
                         Согласие на обработку<br/>персональных данных
                     </label>
-                    <button className="phoneBanner__main__container__submitButton" tabIndex={-1}>ПОДТВЕРДИТЬ НОМЕР</button>
+                    <button
+                        className={`phoneBanner__main__container__submitButton${currentPosition === NAVIGATION_POINT.SUBMIT ? isSubmitButtonAvailable ? "__pointA" : "__point" : ""}`}
+                        tabIndex={-1}
+                    >
+                        ПОДТВЕРДИТЬ НОМЕР
+                    </button>
                 </div>
             </div>
             <div className="phoneBanner__leftSide">
-                <img className="phoneBanner__leftSide__closeButton" src={currentPosition === NAVIGATION_POINT.CLOSE ? closeButtonPoint : closeButton} alt={"Close button"}/>
+                <img
+                    className="phoneBanner__leftSide__closeButton"
+                    src={currentPosition === NAVIGATION_POINT.CLOSE ? closeButtonPoint : closeButton}
+                    alt={"Close button"}
+                    onClick={() => toggleComponent()}
+                />
                 <div className="phoneBanner__leftSide__QR-Code">
                     <p className="phoneBanner__leftSide__QR-Code__text">Сканируйте QR-код ДЛЯ ПОЛУЧЕНИЯ ДОПОЛНИТЕЛЬНОЙ ИНФОРМАЦИИ</p>
                     <img className="phoneBanner__leftSide__QR-Code__img" src={QRCode} alt=""/>

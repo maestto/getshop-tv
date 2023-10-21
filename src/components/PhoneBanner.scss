@@ -79,7 +79,7 @@
         margin-right: 10px;
       }
 
-      &__submitButton {
+      @mixin buttonStyles {
         @include text(14px, 400);
         width: 100%;
         margin-top: 13px;
@@ -91,10 +91,21 @@
         flex-shrink: 0;
         border: 1px solid #4E4E4E;
         margin-bottom: 72px;
+      }
 
-        .point {
-          color: #FFFFFF;
-          background: #000000;
+      &__submitButton {
+        @include buttonStyles;
+
+        &__point {
+          @include buttonStyles;
+          box-shadow: 0 0 5px #000;
+        }
+
+        &__pointA {
+          @include buttonStyles;
+          color: #FFF;
+          background-color: #000;
+          border: 1px solid #000;
         }
       }
     }
