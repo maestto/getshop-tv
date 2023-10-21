@@ -21,16 +21,16 @@ function MainBanner() {
 
     return (
         <div className="mainBanner">
-            <div className="background-video">
+            <div className="mainBanner__background-video">
                 <video ref={videoRef} autoPlay loop muted> {/* без muted автовоспроизведение не работает, пытался фиксить, но не понял как =( */}
                     <source src={video} type="video/mp4" />
                 </video>
             </div>
-            <div className="banner">
-                <h1>ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША!<br/>ПОДАРИТЕ ЕМУ СОБАКУ!</h1>
-                <img src={QRCode} alt="QR code"/>
-                <h2>Сканируйте QR-код или нажмите ОК</h2>
-                <button onClick={() => console.log('Go to PhoneBanner')}>ОК</button>
+            <div className="mainBanner__banner">
+                <h1 className="mainBanner__banner__header">ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША!<br/>ПОДАРИТЕ ЕМУ СОБАКУ!</h1>
+                <img className="mainBanner__banner__img" src={QRCode} alt="QR code"/>
+                <h2 className="mainBanner__banner__subheader">Сканируйте QR-код или нажмите ОК</h2>
+                <button className="mainBanner__banner__button" onClick={() => console.log('Go to PhoneBanner')}>ОК</button>
             </div>
         </div>
     );
