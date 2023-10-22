@@ -17,6 +17,7 @@ const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
     const [isCheckboxChecked, setIsCheckboxChecked] = useState<boolean>(false);
     const [phoneNumber, setPhoneNumber] = useState<string>("+7(___)___-__-__");
     const [isSubmitButtonAvailable, setIsSubmitButtonAvailable] = useState<boolean>(false);
+    const [isFinalContent, setIsFinalContent] = useState<boolean>(true);
 
     enum NAVIGATION_POINT {
         ONE = 0,
@@ -99,7 +100,7 @@ const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
                         return setIsCheckboxChecked(!isCheckboxChecked);
                     }
                     case NAVIGATION_POINT.SUBMIT: {
-                        if(isSubmitButtonAvailable) console.log('transition to info')
+                        if(isSubmitButtonAvailable) setIsFinalContent(true);
                         return;
                     }
                     case NAVIGATION_POINT.CLOSE: {
@@ -143,45 +144,57 @@ const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
 
     return (
         <div className="phoneBanner">
-            <div className="phoneBanner__main">
-                <h1 className="phoneBanner__main__header">Введите ваш номер мобильного телефона</h1>
-                <p className="phoneBanner__main__phone">{phoneNumber}</p>
-                <h2 className="phoneBanner__main__subheader">и с Вами свяжется наш менеждер для<br/>дальнейшей консультации</h2>
-                <div className="phoneBanner__main__container">
-                    <div className="phoneBanner__main__container__keyboard">
-                        {
-                            keyboardButtons.map((buttonLabel: string, index: number) => (
-                                <button
-                                    key = {index}
-                                    className = {`${buttonLabel === 'СТЕРЕТЬ' ? 'key clear' : 'key'} ${currentPosition === index ? 'point' : ''}`}
-                                    onClick = {(): void => {
-                                        if (buttonLabel === 'СТЕРЕТЬ') removeLastNumberFromPhoneNumber();
-                                        else addNumberToPhoneNumber(buttonLabel);
-                                    }}
-                                    tabIndex={-1}
-                                >
-                                    {buttonLabel}
-                                </button>
-                            ))}
-                    </div>
-                    <label className="phoneBanner__main__container__checkboxLabel" onClick={() => setIsCheckboxChecked(!isCheckboxChecked)}>
-                        <div className={`phoneBanner__main__container__checkboxLabel__checkbox ${isCheckboxChecked ? 'checked' : ''}`}>
-                            <img
-                                className = {`phoneBanner__main__container__checkboxLabel__img__${currentPosition === NAVIGATION_POINT.CHECKBOX ? "point" : ""}`}
-                                src = {isCheckboxChecked ? checkboxChecked : checkbox}
-                                alt = "Checkbox"
-                            />
+            {
+                !isFinalContent
+                    ?
+                (
+                <div className="phoneBanner__main">
+                    <h1 className="phoneBanner__main__header">Введите ваш номер мобильного телефона</h1>
+                    <p className="phoneBanner__main__phone">{phoneNumber}</p>
+                    <h2 className="phoneBanner__main__subheader">и с Вами свяжется наш менеждер для<br/>дальнейшей консультации</h2>
+                    <div className="phoneBanner__main__container">
+                        <div className="phoneBanner__main__container__keyboard">
+                            {
+                                keyboardButtons.map((buttonLabel: string, index: number) => (
+                                    <button
+                                        key = {index}
+                                        className = {`${buttonLabel === 'СТЕРЕТЬ' ? 'key clear' : 'key'} ${currentPosition === index ? 'point' : ''}`}
+                                        onClick = {(): void => {
+                                            if (buttonLabel === 'СТЕРЕТЬ') removeLastNumberFromPhoneNumber();
+                                            else addNumberToPhoneNumber(buttonLabel);
+                                        }}
+                                        tabIndex={-1}
+                                    >
+                                        {buttonLabel}
+                                    </button>
+                                ))}
                         </div>
-                        Согласие на обработку<br/>персональных данных
-                    </label>
-                    <button
-                        className={`phoneBanner__main__container__submitButton${currentPosition === NAVIGATION_POINT.SUBMIT ? isSubmitButtonAvailable ? "__pointA" : "__point" : ""}`}
-                        tabIndex={-1}
-                    >
-                        ПОДТВЕРДИТЬ НОМЕР
-                    </button>
-                </div>
-            </div>
+                        <label className="phoneBanner__main__container__checkboxLabel" onClick={() => setIsCheckboxChecked(!isCheckboxChecked)}>
+                            <div className={`phoneBanner__main__container__checkboxLabel__checkbox ${isCheckboxChecked ? 'checked' : ''}`}>
+                                <img
+                                    className = {`phoneBanner__main__container__checkboxLabel__img__${currentPosition === NAVIGATION_POINT.CHECKBOX ? "point" : ""}`}
+                                    src = {isCheckboxChecked ? checkboxChecked : checkbox}
+                                    alt = "Checkbox"
+                                />
+                            </div>
+                            Согласие на обработку<br/>персональных данных
+                        </label>
+                        <button
+                            className={`phoneBanner__main__container__submitButton${currentPosition === NAVIGATION_POINT.SUBMIT ? isSubmitButtonAvailable ? "__pointA" : "__point" : ""}`}
+                            tabIndex={-1}
+                        >
+                            ПОДТВЕРДИТЬ НОМЕР
+                        </button>
+                    </div>
+                </div>)
+                    :
+                    (<div className="phoneBanner__final">
+                        <div className="phoneBanner__final__container">
+                            <h1 className="phoneBanner__final__container__header">ЗАЯВКА<br/>ПРИНЯТА</h1>
+                            <h2 className="phoneBanner__final__container__subheader">Держите телефон под рукой.<br/>Скоро с Вами свяжется наш менеджер.</h2>
+                        </div>
+                    </div>)
+            }
             <div className="phoneBanner__leftSide">
                 <img
                     className="phoneBanner__leftSide__closeButton"

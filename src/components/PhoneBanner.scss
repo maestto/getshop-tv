@@ -147,4 +147,24 @@
       }
     }
   }
+
+  &__final {
+    background: #86D3F4;
+    max-width: 380px;
+    height: 721px;
+    display: flex;
+    flex-direction: column;
+    &__container {
+      margin-top: 265px;
+      margin-left: 48px;
+      margin-right: 48px;
+      &__header {
+        @include text(32px, 700);
+        margin-bottom: 15px;
+      }
+      &__subheader {
+        @include text(14px, 400);
+      }
+    }
+  }
 }
