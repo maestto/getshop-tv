@@ -22,10 +22,10 @@ const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
 
     // const toggleVideo = (): void => {
     //     const video = videoRef.current;
-    //     if (video) {
-    //         if (video.paused) video.play();
-    //         else video.pause();
-    //     }
+    //     // if (video) {
+    //     //     if (video.paused) video.play();
+    //     //     else video.pause();
+    //     // }
     // };
 
     useEffect(() => {
@@ -48,6 +48,7 @@ const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
                 <video ref={videoRef} autoPlay loop muted> {/* без muted автовоспроизведение не работает, пытался фиксить, но не понял как =( */}
                     <source src={video} type="video/mp4" />
                 </video>
+                {/*<h1>{videoRef.current?.currentTime}</h1>*/}
             </div>
             <motion.div
                 initial={{ opacity: 0 }}

@@ -8,7 +8,7 @@
 
   &__main {
     background: #86D3F4;
-    max-width: 380px;
+    width: 380px;
     height: 721px;
     display: flex;
     flex-direction: column;
@@ -79,33 +79,37 @@
         margin-right: 10px;
       }
 
-      @mixin buttonStyles {
+      @mixin buttonStyles($border) {
         @include text(14px, 400);
         width: 100%;
         margin-top: 13px;
         background: #86D3F4;
-        color: #4E4E4E;
+        color: $border;
         padding: 16px 19px;
         align-items: center;
         gap: 10px;
         flex-shrink: 0;
-        border: 1px solid #4E4E4E;
+        border: 1px solid $border;
         margin-bottom: 72px;
       }
 
-      &__submitButton {
-        @include buttonStyles;
+      .buttonEnabled {
+        @include buttonStyles(#000);
 
         &__point {
-          @include buttonStyles;
-          box-shadow: 0 0 5px #000;
-        }
-
-        &__pointA {
-          @include buttonStyles;
+          @include buttonStyles(#000);
           color: #FFF;
           background-color: #000;
           border: 1px solid #000;
+        }
+      }
+
+      .buttonDisabled {
+        @include buttonStyles(#4E4E4E);
+
+        &__point {
+          @include buttonStyles(#4E4E4E);
+          box-shadow: 0 0 5px #000;
         }
       }
     }
@@ -150,7 +154,7 @@
 
   &__final {
     background: #86D3F4;
-    max-width: 380px;
+    width: 380px;
     height: 721px;
     display: flex;
     flex-direction: column;
