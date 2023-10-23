@@ -12,15 +12,16 @@ function App() {
 
     return (
         <div className="App">
-            <motion.div
-                key={showMainBanner ? 'MainBanner' : 'PhoneBanner'}
-                initial={{ opacity: 0.5 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0.5 }}
-                transition={{ duration: 0.5 }}
-            >
-                {showMainBanner ? <MainBanner toggleComponent={toggleComponent} /> : <PhoneBanner toggleComponent={toggleComponent} />}
-            </motion.div>
+            {/*<motion.div*/}
+            {/*    key={showMainBanner ? 'MainBanner' : 'PhoneBanner'}*/}
+            {/*    initial={{ opacity: 0.5 }}*/}
+            {/*    animate={{ opacity: 1 }}*/}
+            {/*    exit={{ opacity: 0.5 }}*/}
+            {/*    transition={{ duration: 0.5 }}*/}
+            {/*>*/}
+            {/*    {showMainBanner ? <MainBanner toggleComponent={toggleComponent} /> : <PhoneBanner toggleComponent={toggleComponent} />}*/}
+            {/*</motion.div>*/}
+            <PhoneBanner/>
         </div>
     );
 }
