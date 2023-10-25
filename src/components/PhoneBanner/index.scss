@@ -1,0 +1,22 @@
+.navigatePoint:focus {
+  color: #fff;
+  background-color: #000;
+  outline: none;
+}
+
+button:enabled {
+  border: 2px solid #000;
+}
+
+button:disabled {
+  border: 1px solid #4E4E4E;
+  color: #4E4E4E;
+}
+
+button {
+  background: rgba(0, 0, 0, 0);
+}
+
+//button:hover:enabled {
+//  background: rgba(0, 0, 0, 0.1);
+//}

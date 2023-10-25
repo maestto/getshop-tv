@@ -1,20 +1,20 @@
 import React, {RefObject, useEffect, useRef, useState} from 'react';
 import { motion } from 'framer-motion';
 
-import './MainBanner.scss';
-import QRCode from "../media/qr-code.png"
-import video from "../media/video.mp4"
+import './index.scss';
+import QRCode from "../../media/qr-code.png"
+import video from "./media/video.mp4"
 
 type ComponentProps = { toggleComponent: () => void };
 
 const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
     const videoRef: RefObject<HTMLVideoElement> = useRef(null);
 
-    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [isBannerVisible, setIsBannerVisible] = useState<boolean>(false);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            setIsVisible(true);
+            setIsBannerVisible(true);
         }, 5000);
 
         return () => clearTimeout(timeout);
@@ -31,7 +31,7 @@ const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent): void => {
             if (event.key === 'Enter') {
-                if(isVisible) toggleComponent();
+                if(isBannerVisible) toggleComponent();
             }
         };
 
@@ -40,22 +40,18 @@ const MainBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
         return () => {
             document.removeEventListener('keydown', onKeyDown);
         };
-    }, [isVisible]);
+    }, [isBannerVisible]);
 
     return (
         <div className="mainBanner">
             <div className="mainBanner__background-video">
-                <video ref={videoRef} autoPlay loop muted> {/* без muted автовоспроизведение не работает, пытался фиксить, но не понял как =( */}
+                <video ref={videoRef} autoPlay loop muted>
                     <source src={video} type="video/mp4" />
                 </video>
                 {/*<h1>{videoRef.current?.currentTime}</h1>*/}
             </div>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isVisible ? 1 : 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                {isVisible && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: isBannerVisible ? 1 : 0 }} transition={{ duration: 0.5 }}>
+                {isBannerVisible && (
                     <div className="mainBanner__banner">
                         <h1 className="mainBanner__banner__header">ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША!<br/>ПОДАРИТЕ ЕМУ СОБАКУ!</h1>
                         <img className="mainBanner__banner__img" src={QRCode} alt="QR code"/>

@@ -1,12 +1,17 @@
 import React from 'react';
 
+import "./index.scss"
 import NavigationContainer from "./NavigationContainer";
 
-export default function PhoneBanner() {
+type ComponentProps = { toggleComponent: () => void };
+
+const PhoneBanner: React.FC<ComponentProps> = ({ toggleComponent }) => {
 
     return (
         <div>
-            <NavigationContainer/>
+            <NavigationContainer toggleComponent={toggleComponent}/>
         </div>
     );
 };
+
+export default PhoneBanner;

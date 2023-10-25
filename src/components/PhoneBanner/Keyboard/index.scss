@@ -1,0 +1,18 @@
+.keyboard {
+  width: 100%;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.additional {
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+
+  #clear {
+    width: 186px;
+  }
+}

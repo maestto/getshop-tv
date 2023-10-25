@@ -1,0 +1,46 @@
+@import "../../../mixin.scss";
+
+.form {
+  padding-top: 72px; //
+  padding-bottom: 72px; //
+  text-align: center;
+
+  button {
+    width: 100%;
+  }
+}
+
+.keyboard__container {
+  margin-left: 48px;
+  margin-right: 48px;
+}
+
+.checkbox__container {
+  padding-top: 6px;
+  padding-left: 10px;
+  padding-bottom: 6px;
+}
+
+h1, h2, h3 {
+  margin-bottom: 13px;
+}
+
+h1 {
+  @include text(32px, 700);
+}
+
+h2 {
+  @include text(26px, 400);
+}
+
+h3 {
+  @include text(14px, 400);
+}
+
+button {
+  @include text(16px, 500);
+}
+
+.err {
+  color: #EA0000;
+}
