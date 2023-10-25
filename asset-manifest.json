@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/getshop-tv/static/css/main.4e319a81.css",
+    "main.js": "/getshop-tv/static/js/main.9e41beee.js",
+    "static/media/video.mp4": "/getshop-tv/static/media/video.ff7fe0edfcb242e04ea3.mp4",
+    "static/media/background.png": "/getshop-tv/static/media/background.1d9dde58f312546a3f54.png",
+    "index.html": "/getshop-tv/index.html",
+    "main.4e319a81.css.map": "/getshop-tv/static/css/main.4e319a81.css.map",
+    "main.9e41beee.js.map": "/getshop-tv/static/js/main.9e41beee.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4e319a81.css",
+    "static/js/main.9e41beee.js"
+  ]
+}
