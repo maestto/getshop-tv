@@ -1,0 +1,68 @@
+@import "../../../mixin.scss";
+
+.navigationContainer {
+  background: url("../../../media/background.png");
+  display: flex;
+  justify-content: space-between;
+
+  &__form {
+    width: 380px;
+    height: 721px;
+    background-color: #86D3F4;
+
+    button {
+      height: 52px;
+    }
+
+    .formAccepted {
+      padding-top: 265px;
+    }
+  }
+
+  &__additional {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+
+    button {
+      display: flex;
+      width: 88px;
+      height: 52px;
+      background-color: #fff;
+      stroke-width: 2px;
+      stroke: #000;
+      align-items: center;
+    }
+
+    button:focus {
+      background-color: #000;
+      stroke-width: 2px;
+      stroke: #000;
+
+      svg {
+        line {
+          stroke: #fff;
+        }
+      }
+    }
+
+    &__QR-code {
+      display: flex;
+      margin-left: 20px;
+      align-items: center;
+
+      p {
+        @include text(16px, 500);
+        color: #FFFFFF;
+        text-align: right;
+        text-transform: uppercase;
+        width: 194px;
+        padding-right: 10px;
+      }
+    }
+  }
+}

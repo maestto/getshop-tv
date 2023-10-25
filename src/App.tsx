@@ -10,7 +10,7 @@ function App() {
 
     const toggleComponent = () => { setShowMainBanner((prev: boolean) => !prev) };
 
-    return (
+    return ( // localstorage
         <div className="App">
             <motion.div
                 key={showMainBanner ? 'MainBanner' : 'PhoneBanner'}
@@ -19,8 +19,9 @@ function App() {
                 exit={{ opacity: 0.5 }}
                 transition={{ duration: 0.5 }}
             >
-                {showMainBanner ? <MainBanner toggleComponent={toggleComponent} /> : <PhoneBanner toggleComponent={toggleComponent} />}
+                {showMainBanner ? <MainBanner toggleComponent={toggleComponent} /> : <PhoneBanner toggleComponent={toggleComponent}/>}
             </motion.div>
+
         </div>
     );
 }

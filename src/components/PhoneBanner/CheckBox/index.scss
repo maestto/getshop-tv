@@ -1,0 +1,74 @@
+@import "../../../mixin.scss";
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: 16px;
+  padding-top: 3px;
+  cursor: pointer;
+  @include text(14px, 400);
+  color: #565656;
+  text-align: left;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input:focus + span {
+  background-color: rgba(0,0,0,0.1);
+  font-weight: bold;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 36px;
+  width: 36px;
+  background-color: rgba(0,0,0,0);
+  border: 2px solid #000000
+}
+
+.container:hover input ~ .checkmark {
+  background-color: rgba(0,0,0,0.1)
+}
+
+.container input:checked ~ .checkmark {
+  background-color: rgba(0,0,0,0)
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 12px;
+  top: 2px;
+  width: 10px;
+  height: 24px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.container p {
+  @include text(14px, 400);
+  text-align: left;
+}
